@@ -1,25 +1,42 @@
 'use strict';
 
 const express = require('express');
+const errorMiddleware = require('./error');
+const notFoundMiddleware = require('./notFound');
+const requestTimeMiddleware = require('./requestTime');
+const randomNumberMiddleware = require('./randomNumber');
 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-app.get('/a', (req,res) => {
-  res.status(200).send('Route A');
+app.use(requestTimeMiddleware);
+
+app.get('/a', (request,response) => {
+  response.status(200)
+  .send('Route A');
 });
 
-app.get('/b', (req,res) => {
-  res.status(200).send('Route B');
+app.get('/b', (request,response) => {
+  response.status(200)
+  .send('Route B');
 });
 
-app.get('/c', (req,res) => {
-  res.status(200).send('Route C');
+app.get('/c', randomNumberMiddleware, (request,response) => {
+  response.status(200)
+  .send('Route C');
 });
 
-app.get('/d', (req,res) => {
-  res.status(200).send('Route D');
+app.get('/d', (request,response) => {
+  response.status(200)
+  .send('Route D');
 });
+
+app.get('/*', (request, response) => {
+  response.status(404)
+  .send('Not found');
+  });
+
+app.use(errorMiddleware);
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
