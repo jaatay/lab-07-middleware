@@ -6,6 +6,7 @@ const notFoundMiddleware = require('./notFound');
 const requestTimeMiddleware = require('./requestTime');
 const randomNumberMiddleware = require('./randomNumber');
 const squareNumber = require('./squareNumber');
+const routes = require('./routes');
 
 const app = express();
 
@@ -16,6 +17,8 @@ const numberSquared = number => {
 };
 
 app.use(requestTimeMiddleware);
+app.use(routes);
+
 
 app.get('/a', (request,response) => {
   response.status(200)
@@ -33,17 +36,7 @@ app.get('/b/:number', squareNumber, (request,response) => {
   .send(`Original Number: ${originalNumber}, Squared: ${response.params}`);
 });
 
-app.get('/c', randomNumberMiddleware, (request,response) => {
-  response.status(200)
-  .send('Route C');
-});
-
-app.get('/d', (request,response) => {
-  response.status(200)
-  .send('Route D');
-});
-
-app.get('/*', (request, response) => {
+app.get('/*', notFoundMiddleware, (request, response) => {
   response.status(404)
   .send('Not found');
   });
