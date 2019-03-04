@@ -11,6 +11,10 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+const numberSquared = number => {
+  return number * number;
+};
+
 app.use(requestTimeMiddleware);
 
 app.get('/a', (request,response) => {
@@ -24,9 +28,9 @@ app.get('/b', (request,response) => {
 });
 
 app.get('/b/:number', squareNumber, (request,response) => {
-  request.send(request.params);
+  let originalNumber = request.params.number;
   response.status(200)
-  .send('Route B');
+  .send(`Original Number: ${originalNumber}, Squared: ${response.params}`);
 });
 
 app.get('/c', randomNumberMiddleware, (request,response) => {
