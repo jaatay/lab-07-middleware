@@ -6,7 +6,7 @@
 ### Author: Jesse Atay
 
 ### Links and Resources
-* [repo](https://github.com/jaatay/lab-07-api-server)
+* [repo](https://github.com/jaatay/lab-07-middleware)
 
 
 ### Modules
