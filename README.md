@@ -5,6 +5,8 @@
 
 ### Author: Jesse Atay
 
+[![Build Status](https://travis-ci.org/jaatay/lab-07-middleware.svg?branch=master)](https://travis-ci.org/jaatay/lab-07-middleware)
+
 ### Links and Resources
 * [repo](https://github.com/jaatay/lab-07-middleware)
 
