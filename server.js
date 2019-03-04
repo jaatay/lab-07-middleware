@@ -5,6 +5,7 @@ const errorMiddleware = require('./error');
 const notFoundMiddleware = require('./notFound');
 const requestTimeMiddleware = require('./requestTime');
 const randomNumberMiddleware = require('./randomNumber');
+const squareNumber = require('./squareNumber');
 
 const app = express();
 
@@ -18,6 +19,12 @@ app.get('/a', (request,response) => {
 });
 
 app.get('/b', (request,response) => {
+  response.status(200)
+  .send('Route B');
+});
+
+app.get('/b/:number', squareNumber, (request,response) => {
+  request.send(request.params);
   response.status(200)
   .send('Route B');
 });
